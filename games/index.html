@@ -1,1 +1,119 @@
-1
+<!DOCTYPE html>
+<html lang="zh-HK">
+
+<head>
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-367Z67DHYC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-367Z67DHYC', {
+            page_title: '比賽時間表 - GoGoRef',
+            page_location: window.location.href
+        });
+    </script>
+
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta Tags -->
+    <title>比賽時間表 | GoGoRef 球證預訂系統</title>
+    <meta name="description" content="查看最新的籃球比賽時間表，包括日期、時間、場地及球證安排。">
+    <meta name="keywords" content="籃球比賽,時間表,球證,場地,香港籃球">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gogoref.com/games">
+    <meta property="og:title" content="比賽時間表 | GoGoRef">
+    <meta property="og:description" content="查看最新的籃球比賽時間表">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://gogoref.com/games">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> 返回主頁
+            </a>
+            <img src="../GOGO.png" alt="GoGoRef Logo" class="logo">
+            <h1><i class="fas fa-calendar-alt"></i> 比賽時間表</h1>
+            <p>即時更新的籃球比賽安排</p>
+        </header>
+
+        <main>
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading-container">
+                <div class="spinner"></div>
+                <p>載入中...</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-container" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>無法載入比賽資料，請稍後再試。</p>
+                <button onclick="loadGames()" class="retry-btn">
+                    <i class="fas fa-redo"></i> 重試
+                </button>
+            </div>
+
+            <!-- Filter Section -->
+            <div id="filterSection" class="filter-section" style="display: none;">
+                <div class="filter-group">
+                    <label for="dateFilter">
+                        <i class="fas fa-calendar"></i> 日期篩選：
+                    </label>
+                    <select id="dateFilter" onchange="filterGames()">
+                        <option value="all">全部日期</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="venueFilter">
+                        <i class="fas fa-map-marker-alt"></i> 場地篩選：
+                    </label>
+                    <select id="venueFilter" onchange="filterGames()">
+                        <option value="all">全部場地</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button onclick="resetFilters()" class="reset-btn">
+                        <i class="fas fa-times"></i> 清除篩選
+                    </button>
+                </div>
+            </div>
+
+            <!-- Games List -->
+            <div id="gamesList" class="games-list" style="display: none;">
+                <!-- Games will be dynamically inserted here -->
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <p>沒有找到符合條件的比賽</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>資料即時更新 | 最後更新：<span id="lastUpdate">--</span></p>
+            <a href="../index.html" class="book-now-btn">
+                <i class="fas fa-calendar-plus"></i> 立即預訂
+            </a>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
