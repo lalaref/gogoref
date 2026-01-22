@@ -1,1 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比賽時間表 | GoGoRef</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.7) 0%, rgba(118, 75, 162, 0.7) 100%),
+                        url('../wall.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .logo {
+            max-width: 120px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .sheets-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .sheet-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #718096;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .sheet-content {
+            display: none;
+        }
+
+        .sheet-content.active {
+            display: block;
+        }
+
+        .sheet-frame {
+            width: 100%;
+            height: 800px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .book-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .sheet-tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+            }
+
+            .tab-btn.active {
+                border-left-color: #667eea;
+            }
+
+            .sheet-frame {
+                height: 600px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> 返回主頁
+            </a>
+            <br>
+            <img src="../GOGO.png" alt="GoGoRef Logo" class="logo">
+            <h1><i class="fas fa-calendar-alt"></i> 比賽時間表</h1>
+            <p class="subtitle">ASA 2025 Winter Tournament</p>
+        </header>
+
+        <div class="sheets-container">
+            <!-- 標籤 -->
+            <div class="sheet-tabs">
+                <button class="tab-btn active" onclick="showSheet('saturday')">
+                    <i class="fas fa-calendar"></i> 星期六 (Nov 8)
+                </button>
+                <button class="tab-btn" onclick="showSheet('sunday')">
+                    <i class="fas fa-calendar"></i> 星期日 (Nov 9)
+                </button>
+            </div>
+
+            <!-- 星期六 Google Sheets -->
+            <div id="saturday" class="sheet-content active">
+                <iframe 
+                    class="sheet-frame"
+                    src="https://docs.google.com/spreadsheets/d/1lsP6VImpOraHe8g-Apgc86R8se4Dfpe5gBLHbKuPFT0/edit?rm=minimal&gid=0#gid=0&range=A1:C20">
+                </iframe>
+            </div>
+
+            <!-- 星期日 Google Sheets -->
+            <div id="sunday" class="sheet-content">
+                <iframe 
+                    class="sheet-frame"
+                    src="https://docs.google.com/spreadsheets/d/1lsP6VImpOraHe8g-Apgc86R8se4Dfpe5gBLHbKuPFT0/edit?rm=minimal&gid=1#gid=1&range=A1:C20">
+                </iframe>
+            </div>
+        </div>
+
+        <footer>
+            <a href="../index.html" class="book-btn">
+                <i class="fas fa-calendar-plus"></i> 立即預訂球證
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        function showSheet(day) {
+            // 隱藏所有內容
+            document.querySelectorAll('.sheet-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 移除所有標籤的 active
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 顯示選中的內容
+            document.getElementById(day).classList.add('active');
+            
+            // 標記選中的標籤
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
