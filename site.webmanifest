@@ -1,0 +1,57 @@
+{
+    "name": "籃球球證及紀錄台預訂系統",
+    "short_name": "籃球球證預訂",
+    "description": "香港專業籃球球證及紀錄台預訂系統",
+    "start_url": "/basketball-booking/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ff6b35",
+    "orientation": "portrait-primary",
+    "scope": "/basketball-booking/",
+    "lang": "zh-HK",
+    "dir": "ltr",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        }
+    ],
+    "categories": ["sports", "business", "productivity"],
+    "screenshots": [
+        {
+            "src": "/screenshot-wide.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/screenshot-narrow.png",
+            "sizes": "750x1334",
+            "type": "image/png",
+            "form_factor": "narrow"
+        }
+    ]
+}
