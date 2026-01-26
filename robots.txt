@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://yourdomain.com/basketball-booking/sitemap.xml
+Sitemap: https://gogoref.com/sitemap.xml
 
 # Crawl-delay for better server performance
 Crawl-delay: 1
