@@ -134,11 +134,22 @@
     <div class="container">
         <header>
             <img src="GOGO.png" alt="GoGoRef Logo" class="logo">
-            <h1><i class="fas fa-basketball-ball"></i> GoGoRef 球證預訂系統</h1>
-            <p>為您的籃球比賽尋找專業裁判和工作人員</p>
+            
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="zh" onclick="switchLanguage('zh')">
+                    <i class="fas fa-globe"></i> 中文
+                </button>
+                <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">
+                    <i class="fas fa-globe"></i> English
+                </button>
+            </div>
+            
+            <h1><i class="fas fa-basketball-ball"></i> <span data-i18n="header.title">GoGoRef 球證預訂系統</span></h1>
+            <p data-i18n="header.subtitle">為您的籃球比賽尋找專業裁判和工作人員</p>
             <div style="margin-top: 15px;">
                 <a href="games/" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; transition: all 0.3s ease;">
-                    <i class="fas fa-calendar-alt"></i> 查看比賽時間表
+                    <i class="fas fa-calendar-alt"></i> <span data-i18n="header.schedule">查看比賽時間表</span>
                 </a>
             </div>
         </header>
@@ -149,19 +160,19 @@
             <form id="bookingForm" class="booking-form">
                 <!-- Date and Time Selection -->
                 <div class="form-section">
-                    <h2><i class="fas fa-calendar-alt"></i> 選擇日期和時間</h2>
+                    <h2><i class="fas fa-calendar-alt"></i> <span data-i18n="form.dateTime.title">選擇日期和時間</span></h2>
                     <div class="date-time-container">
                         <div class="input-group">
-                            <label for="bookingDate">日期：</label>
+                            <label for="bookingDate" data-i18n="form.dateTime.date">日期：</label>
                             <input type="date" id="bookingDate" name="bookingDate" required>
                         </div>
                         <div class="time-inputs">
                             <div class="input-group">
-                                <label for="startTime">開始時間：</label>
+                                <label for="startTime" data-i18n="form.dateTime.startTime">開始時間：</label>
                                 <input type="time" id="startTime" name="startTime" value="21:00" required>
                             </div>
                             <div class="input-group">
-                                <label for="endTime">結束時間：</label>
+                                <label for="endTime" data-i18n="form.dateTime.endTime">結束時間：</label>
                                 <input type="time" id="endTime" name="endTime" value="23:00" required>
                             </div>
                         </div>
@@ -170,11 +181,11 @@
 
                 <!-- Venue Information -->
                 <div class="form-section">
-                    <h2><i class="fas fa-map-marker-alt"></i> 場地詳情</h2>
+                    <h2><i class="fas fa-map-marker-alt"></i> <span data-i18n="form.venue.title">場地詳情</span></h2>
                     <div class="input-group">
-                        <label for="venueName">體育館：</label>
+                        <label for="venueName" data-i18n="form.venue.name">體育館：</label>
                         <select id="venueName" name="venueName">
-                            <option value="">請選擇場地</option>
+                            <option value="" data-i18n="form.venue.select">請選擇場地</option>
                             <optgroup label="九龍區">
                                 <option value="花園街體育館">花園街體育館</option>
                                 <option value="長沙灣體育館">長沙灣體育館</option>
@@ -251,22 +262,22 @@
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="venueAddress">其它指定場地：</label>
-                        <textarea id="venueAddress" name="venueAddress" placeholder="請輸入完整場地地址，包括街道、區域、城市"
+                        <label for="venueAddress" data-i18n="form.venue.other">其它指定場地：</label>
+                        <textarea id="venueAddress" name="venueAddress" data-i18n-placeholder="form.venue.addressPlaceholder"
                             rows="3"></textarea>
                     </div>
                 </div>
 
                 <!-- Game Type Selection -->
                 <div class="form-section">
-                    <h2><i class="fas fa-users"></i> 比賽類型</h2>
+                    <h2><i class="fas fa-users"></i> <span data-i18n="form.gameType.title">比賽類型</span></h2>
                     <div class="game-type-container">
                         <div class="game-option">
                             <input type="radio" id="fullCourt" name="gameType" value="5v5-full" checked required>
                             <label for="fullCourt" class="game-card">
                                 <div class="game-icon">🏀</div>
                                 <h3>5 vs 5</h3>
-                                <p>全場</p>
+                                <p data-i18n="form.gameType.fullCourt">全場</p>
                             </label>
                         </div>
                         <div class="game-option">
@@ -274,7 +285,7 @@
                             <label for="halfCourt" class="game-card">
                                 <div class="game-icon">⛹️</div>
                                 <h3>3 x 3</h3>
-                                <p>半場</p>
+                                <p data-i18n="form.gameType.halfCourt">半場</p>
                             </label>
                         </div>
                     </div>
@@ -282,7 +293,7 @@
 
                 <!-- Referee Selection -->
                 <div class="form-section">
-                    <h2><i class="fas fa-whistle"></i> 裁判人數</h2>
+                    <h2><i class="fas fa-whistle"></i> <span data-i18n="form.referees.title">裁判人數</span></h2>
                     <div class="counter-container">
                         <button type="button" class="counter-btn" onclick="changeCount('referees', -1)">-</button>
                         <span class="counter-display" id="refereesCount">2</span>
@@ -293,7 +304,7 @@
 
                 <!-- Scoring Table Selection -->
                 <div class="form-section">
-                    <h2><i class="fas fa-table"></i> 紀錄台</h2>
+                    <h2><i class="fas fa-table"></i> <span data-i18n="form.tables.title">紀錄台</span></h2>
                     <div class="counter-container">
                         <button type="button" class="counter-btn" onclick="changeCount('tables', -1)">-</button>
                         <span class="counter-display" id="tablesCount">0</span>
@@ -304,32 +315,32 @@
 
                 <!-- Additional Services -->
                 <div class="form-section">
-                    <h2><i class="fas fa-camera"></i> 其它服務(如影相)</h2>
+                    <h2><i class="fas fa-camera"></i> <span data-i18n="form.services.title">其它服務(如影相)</span></h2>
                     <div class="input-group">
-                        <label for="additionalServices">服務詳情：</label>
+                        <label for="additionalServices" data-i18n="form.services.label">服務詳情：</label>
                         <textarea id="additionalServices" name="additionalServices"
-                            placeholder="請輸入所需的其它服務，例如：攝影、錄影、直播、音響設備等" rows="3"></textarea>
+                            data-i18n-placeholder="form.services.placeholder" rows="3"></textarea>
                     </div>
                 </div>
 
                 <!-- Contact Information -->
                 <div class="form-section">
-                    <h2><i class="fas fa-user"></i> 聯絡資料</h2>
+                    <h2><i class="fas fa-user"></i> <span data-i18n="form.contact.title">聯絡資料</span></h2>
                     <div class="input-group">
-                        <label for="clientName">您的姓名：</label>
-                        <input type="text" id="clientName" name="clientName" placeholder="請輸入您的姓名" required>
+                        <label for="clientName" data-i18n="form.contact.name">您的姓名：</label>
+                        <input type="text" id="clientName" name="clientName" data-i18n-placeholder="form.contact.namePlaceholder" required>
                     </div>
                     <div class="input-group">
-                        <label for="clientPhone">電話號碼：</label>
-                        <input type="tel" id="clientPhone" name="clientPhone" placeholder="請輸入您的電話號碼" required>
+                        <label for="clientPhone" data-i18n="form.contact.phone">電話號碼：</label>
+                        <input type="tel" id="clientPhone" name="clientPhone" data-i18n-placeholder="form.contact.phonePlaceholder" required>
                     </div>
                 </div>
 
                 <!-- Book Button -->
                 <button type="submit" class="book-btn">
-                    <i class="fas fa-calendar-check"></i> 立即預訂
+                    <i class="fas fa-calendar-check"></i> <span data-i18n="form.submit">立即預訂</span>
                 </button>
-                <p style="color: red; text-align: center; margin-top: 10px; font-weight: bold;">
+                <p style="color: red; text-align: center; margin-top: 10px; font-weight: bold;" data-i18n="form.whatsappNote">
                     請務必透過Whatsapp 傳送申請資料,以作核實
                 </p>
             </form>
@@ -340,25 +351,25 @@
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2><i class="fas fa-clipboard-list"></i> 預訂確認</h2>
+            <h2><i class="fas fa-clipboard-list"></i> <span data-i18n="modal.title">預訂確認</span></h2>
 
             <div class="booking-summary">
-                <h3>預訂摘要</h3>
+                <h3 data-i18n="modal.summary">預訂摘要</h3>
                 <div id="summaryContent"></div>
             </div>
 
             <div class="booking-status">
                 <div class="status-message">
                     <i class="fas fa-check-circle"></i>
-                    <p>預訂詳情已發送給我們的團隊！</p>
-                    <small>我們將盡快聯絡您確認球證供應情況及價格。</small>
+                    <p data-i18n="modal.success">預訂詳情已發送給我們的團隊！</p>
+                    <small data-i18n="modal.followUp">我們將盡快聯絡您確認球證供應情況及價格。</small>
                 </div>
             </div>
 
             <div class="contact-section">
-                <h3>需要協助？聯絡我們</h3>
+                <h3 data-i18n="modal.contactTitle">需要協助？聯絡我們</h3>
                 <a href="#" id="whatsappLink" class="whatsapp-btn">
-                    <i class="fab fa-whatsapp"></i> WhatsApp 對話
+                    <i class="fab fa-whatsapp"></i> <span data-i18n="modal.whatsapp">WhatsApp 對話</span>
                 </a>
             </div>
         </div>

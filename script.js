@@ -7,6 +7,173 @@ const CONFIG = {
     AUTO_SEND_DELAY: 500  // Delay before opening admin WhatsApp (milliseconds)
 };
 
+// ===== TRANSLATIONS =====
+const translations = {
+    zh: {
+        header: {
+            title: 'GoGoRef 球證預訂系統',
+            subtitle: '為您的籃球比賽尋找專業裁判和工作人員',
+            schedule: '查看比賽時間表'
+        },
+        form: {
+            dateTime: {
+                title: '選擇日期和時間',
+                date: '日期：',
+                startTime: '開始時間：',
+                endTime: '結束時間：'
+            },
+            venue: {
+                title: '場地詳情',
+                name: '體育館：',
+                select: '請選擇場地',
+                other: '其它指定場地：',
+                addressPlaceholder: '請輸入完整場地地址，包括街道、區域、城市'
+            },
+            gameType: {
+                title: '比賽類型',
+                fullCourt: '全場',
+                halfCourt: '半場'
+            },
+            referees: {
+                title: '裁判人數'
+            },
+            tables: {
+                title: '紀錄台'
+            },
+            services: {
+                title: '其它服務(如影相)',
+                label: '服務詳情：',
+                placeholder: '請輸入所需的其它服務，例如：攝影、錄影、直播、音響設備等'
+            },
+            contact: {
+                title: '聯絡資料',
+                name: '您的姓名：',
+                namePlaceholder: '請輸入您的姓名',
+                phone: '電話號碼：',
+                phonePlaceholder: '請輸入您的電話號碼'
+            },
+            submit: '立即預訂',
+            whatsappNote: '請務必透過Whatsapp 傳送申請資料,以作核實'
+        },
+        modal: {
+            title: '預訂確認',
+            summary: '預訂摘要',
+            success: '預訂詳情已發送給我們的團隊！',
+            followUp: '我們將盡快聯絡您確認球證供應情況及價格。',
+            contactTitle: '需要協助？聯絡我們',
+            whatsapp: 'WhatsApp 對話',
+            bookingId: '預訂編號：',
+            date: '日期：',
+            time: '時間：',
+            venue: '體育館：',
+            address: '完整地址：',
+            gameType: '比賽類型：',
+            referees: '裁判：',
+            tables: '紀錄台：',
+            services: '其它服務：',
+            contact: '聯絡人：',
+            people: '人'
+        },
+        validation: {
+            date: '日期',
+            startTime: '開始時間',
+            endTime: '結束時間',
+            venueName: '場地名稱',
+            venueAddress: '場地地址',
+            gameType: '比賽類型',
+            clientName: '姓名',
+            clientPhone: '電話號碼',
+            fillField: '請填寫',
+            selectVenue: '請選擇體育館或填寫完整地址',
+            timeError: '結束時間必須在開始時間之後',
+            phoneError: '請輸入有效的電話號碼'
+        }
+    },
+    en: {
+        header: {
+            title: 'GoGoRef Referee Booking System',
+            subtitle: 'Find Professional Referees and Staff for Your Basketball Games',
+            schedule: 'View Game Schedule'
+        },
+        form: {
+            dateTime: {
+                title: 'Select Date and Time',
+                date: 'Date:',
+                startTime: 'Start Time:',
+                endTime: 'End Time:'
+            },
+            venue: {
+                title: 'Venue Details',
+                name: 'Sports Center:',
+                select: 'Please select a venue',
+                other: 'Other Specified Venue:',
+                addressPlaceholder: 'Please enter complete venue address, including street, district, city'
+            },
+            gameType: {
+                title: 'Game Type',
+                fullCourt: 'Full Court',
+                halfCourt: 'Half Court'
+            },
+            referees: {
+                title: 'Number of Referees'
+            },
+            tables: {
+                title: 'Scoring Table'
+            },
+            services: {
+                title: 'Additional Services (e.g. Photography)',
+                label: 'Service Details:',
+                placeholder: 'Please enter required additional services, e.g.: photography, videography, live streaming, audio equipment, etc.'
+            },
+            contact: {
+                title: 'Contact Information',
+                name: 'Your Name:',
+                namePlaceholder: 'Please enter your name',
+                phone: 'Phone Number:',
+                phonePlaceholder: 'Please enter your phone number'
+            },
+            submit: 'Book Now',
+            whatsappNote: 'Please send application details via WhatsApp for verification'
+        },
+        modal: {
+            title: 'Booking Confirmation',
+            summary: 'Booking Summary',
+            success: 'Booking details have been sent to our team!',
+            followUp: 'We will contact you soon to confirm referee availability and pricing.',
+            contactTitle: 'Need Assistance? Contact Us',
+            whatsapp: 'WhatsApp Chat',
+            bookingId: 'Booking ID:',
+            date: 'Date:',
+            time: 'Time:',
+            venue: 'Sports Center:',
+            address: 'Full Address:',
+            gameType: 'Game Type:',
+            referees: 'Referees:',
+            tables: 'Scoring Table:',
+            services: 'Additional Services:',
+            contact: 'Contact:',
+            people: 'person(s)'
+        },
+        validation: {
+            date: 'Date',
+            startTime: 'Start Time',
+            endTime: 'End Time',
+            venueName: 'Venue Name',
+            venueAddress: 'Venue Address',
+            gameType: 'Game Type',
+            clientName: 'Name',
+            clientPhone: 'Phone Number',
+            fillField: 'Please fill in',
+            selectVenue: 'Please select a sports center or enter complete address',
+            timeError: 'End time must be after start time',
+            phoneError: 'Please enter a valid phone number'
+        }
+    }
+};
+
+// Current language
+let currentLang = localStorage.getItem('preferredLanguage') || 'zh';
+
 // Global variables
 let refereeCount = 2;
 let tableCount = 0;
@@ -15,7 +182,75 @@ let tableCount = 0;
 document.addEventListener('DOMContentLoaded', function() {
     initializeDatePicker();
     setupEventListeners();
+    initializeLanguage();
 });
+
+// ===== LANGUAGE SWITCHING =====
+function switchLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('preferredLanguage', lang);
+    
+    // Update active button
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-lang') === lang) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Update all translated elements
+    updateTranslations();
+    
+    // Track language change
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'language_changed', {
+            event_category: 'user_interaction',
+            event_label: lang
+        });
+    }
+}
+
+function initializeLanguage() {
+    // Set active language button
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === currentLang) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Apply translations
+    updateTranslations();
+}
+
+function updateTranslations() {
+    const t = translations[currentLang];
+    
+    // Update all elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        const translation = getNestedTranslation(t, key);
+        if (translation) {
+            element.textContent = translation;
+        }
+    });
+    
+    // Update placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        const translation = getNestedTranslation(t, key);
+        if (translation) {
+            element.placeholder = translation;
+        }
+    });
+}
+
+function getNestedTranslation(obj, path) {
+    return path.split('.').reduce((current, key) => current?.[key], obj);
+}
+
+function getTranslation(key) {
+    return getNestedTranslation(translations[currentLang], key);
+}
 
 // Set minimum date to today and set default to today
 function initializeDatePicker() {
@@ -199,21 +434,13 @@ function validateForm() {
         'clientPhone'
     ];
     
+    const t = translations[currentLang].validation;
+    
     // Check basic required fields
     for (const fieldId of requiredFields) {
         const field = document.getElementById(fieldId) || document.querySelector(`[name="${fieldId}"]`);
         if (!field || !field.value.trim()) {
-            const fieldNames = {
-                'bookingDate': '日期',
-                'startTime': '開始時間',
-                'endTime': '結束時間',
-                'venueName': '場地名稱',
-                'venueAddress': '場地地址',
-                'gameType': '比賽類型',
-                'clientName': '姓名',
-                'clientPhone': '電話號碼'
-            };
-            alert(`請填寫${fieldNames[fieldId] || fieldId}`);
+            alert(`${t.fillField}${t[fieldId] || fieldId}`);
             if (field) field.focus();
             return false;
         }
@@ -224,7 +451,7 @@ function validateForm() {
     const venueAddress = document.getElementById('venueAddress').value.trim();
     
     if (!venueName && !venueAddress) {
-        alert('請選擇體育館或填寫完整地址');
+        alert(t.selectVenue);
         document.getElementById('venueName').focus();
         return false;
     }
@@ -234,7 +461,7 @@ function validateForm() {
     const endTime = document.getElementById('endTime').value;
     
     if (startTime >= endTime) {
-        alert('結束時間必須在開始時間之後');
+        alert(t.timeError);
         document.getElementById('endTime').focus();
         return false;
     }
@@ -243,7 +470,7 @@ function validateForm() {
     const phonePattern = /^[+]?[\d\s\-\(\)]{8,}$/;
     const phone = document.getElementById('clientPhone').value;
     if (!phonePattern.test(phone)) {
-        alert('請輸入有效的電話號碼');
+        alert(t.phoneError);
         document.getElementById('clientPhone').focus();
         return false;
     }
@@ -254,7 +481,10 @@ function validateForm() {
 // Collect form data
 function collectFormData() {
     const gameTypeElement = document.querySelector('input[name="gameType"]:checked');
-    const gameTypeText = gameTypeElement.value === '5v5-full' ? '5 vs 5 (全場)' : '3 x 3 (半場)';
+    const t = translations[currentLang];
+    const gameTypeText = gameTypeElement.value === '5v5-full' 
+        ? `5 vs 5 (${t.form.gameType.fullCourt})` 
+        : `3 x 3 (${t.form.gameType.halfCourt})`;
     
     // Format time slot from separate start and end time inputs
     const startTime = document.getElementById('startTime').value;
@@ -279,10 +509,11 @@ function collectFormData() {
 function showPaymentModal(formData) {
     const modal = document.getElementById('paymentModal');
     const summaryContent = document.getElementById('summaryContent');
+    const t = translations[currentLang].modal;
     
     // Format date for display
     const bookingDate = new Date(formData.date);
-    const formattedDate = bookingDate.toLocaleDateString('en-US', {
+    const formattedDate = bookingDate.toLocaleDateString(currentLang === 'zh' ? 'zh-HK' : 'en-US', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
@@ -292,47 +523,47 @@ function showPaymentModal(formData) {
     // Create booking summary HTML
     summaryContent.innerHTML = `
         <div class="summary-item">
-            <span class="summary-label">預訂編號：</span>
+            <span class="summary-label">${t.bookingId}</span>
             <span class="summary-value">${formData.bookingId}</span>
         </div>
         <div class="summary-item">
-            <span class="summary-label">日期：</span>
+            <span class="summary-label">${t.date}</span>
             <span class="summary-value">${formattedDate}</span>
         </div>
         <div class="summary-item">
-            <span class="summary-label">時間：</span>
+            <span class="summary-label">${t.time}</span>
             <span class="summary-value">${formData.timeSlot}</span>
         </div>
         ${formData.venueName ? `
         <div class="summary-item">
-            <span class="summary-label">體育館：</span>
+            <span class="summary-label">${t.venue}</span>
             <span class="summary-value">${formData.venueName}</span>
         </div>` : ''}
         ${formData.venueAddress ? `
         <div class="summary-item">
-            <span class="summary-label">完整地址：</span>
+            <span class="summary-label">${t.address}</span>
             <span class="summary-value">${formData.venueAddress}</span>
         </div>` : ''}
         <div class="summary-item">
-            <span class="summary-label">比賽類型：</span>
+            <span class="summary-label">${t.gameType}</span>
             <span class="summary-value">${formData.gameType}</span>
         </div>
 
         <div class="summary-item">
-            <span class="summary-label">裁判：</span>
-            <span class="summary-value">${formData.referees} 人</span>
+            <span class="summary-label">${t.referees}</span>
+            <span class="summary-value">${formData.referees} ${t.people}</span>
         </div>
         <div class="summary-item">
-            <span class="summary-label">紀錄台：</span>
-            <span class="summary-value">${formData.tables} 人</span>
+            <span class="summary-label">${t.tables}</span>
+            <span class="summary-value">${formData.tables} ${t.people}</span>
         </div>
         ${formData.additionalServices ? `
         <div class="summary-item">
-            <span class="summary-label">其它服務：</span>
+            <span class="summary-label">${t.services}</span>
             <span class="summary-value">${formData.additionalServices}</span>
         </div>` : ''}
         <div class="summary-item">
-            <span class="summary-label">聯絡人：</span>
+            <span class="summary-label">${t.contact}</span>
             <span class="summary-value">${formData.clientName} (${formData.clientPhone})</span>
         </div>
     `;
