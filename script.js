@@ -763,6 +763,38 @@ function scrollToTop() {
     });
 }
 
+// ===== SERVICE RECORDS TOGGLE =====
+function toggleRecords() {
+    const content = document.getElementById('recordsContent');
+    const icon = document.getElementById('toggleIcon');
+    
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        // Collapse
+        content.style.maxHeight = '0px';
+        icon.style.transform = 'rotate(0deg)';
+        
+        // Track collapse event
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'service_records_collapsed', {
+                event_category: 'user_interaction',
+                event_label: 'records_toggle'
+            });
+        }
+    } else {
+        // Expand
+        content.style.maxHeight = content.scrollHeight + 'px';
+        icon.style.transform = 'rotate(180deg)';
+        
+        // Track expand event
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'service_records_expanded', {
+                event_category: 'user_interaction',
+                event_label: 'records_toggle'
+            });
+        }
+    }
+}
+
 
 
 
