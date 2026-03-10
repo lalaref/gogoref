@@ -391,7 +391,7 @@ function handleFormSubmit(event) {
     const formData = collectFormData();
     
     // Generate booking ID once for both WhatsApp and modal
-    const bookingId = `BK${Date.now().toString().slice(-6)}`;
+    const bookingId = `GO${Date.now().toString().slice(-6)}`;
     formData.bookingId = bookingId;
     
     // Track successful form submission
